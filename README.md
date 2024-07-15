@@ -21,6 +21,13 @@ Follow these steps to download and view the project on your local system:
 2. Navigate to the project directory: cd portfolio
 3. Open the project in your preferred code editor or directly in your browser:
    open index.html
+4. Install Node.js file - "https://nodejs.org/en/download/package-manager"
+    Based on your OS download Node js
+5. After installation of node, go to Tailwind CSS
+   a) Click on Get Started
+   b) Do the the necessary steps given
+   c) Website : https://tailwindcss.com/
+   d) Customize the tailwind acording to your folder and files. Ensure that you have placed in a correct folder and working with tailwind is very easy and too responsive design available. 
    
    ## Usage
 This portfolio website is a static site that showcases my projects, skills, and contact information. It's designed to be responsive and works well on both desktop and mobile devices.
