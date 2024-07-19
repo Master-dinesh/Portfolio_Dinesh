@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,291 +9,291 @@
     <link rel="shortcut icon" href="img/Dinesh.jpg" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Day/Night Toggle CSS */
-        .toggle-wrapper {
-            position: relative;
-            width: 50px;
-            height: 25px;
-        }
-        .toggle-checkbox {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .toggle-label {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            cursor: pointer;
-            border-radius: 25px;
-            transition: background-color 0.3s;
-        }
-        .toggle-label::before {
-            content: "";
-            position: absolute;
-            width: 23px;
-            height: 23px;
-            left: 1px;
-            bottom: 1px;
-            background-color: white;
-            border-radius: 50%;
-            transition: transform 0.3s;
-        }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: #4b5563;
-        }
-        .toggle-checkbox:checked + .toggle-label::before {
-            transform: translateX(25px);
-        }
-        /* Dark Mode CSS */
-        .dark-mode {
-            background-color: #1a202c;
-            color: white;
-        }
-        .dark-mode .bg-white {
-            background-color: #2d3748 !important;
-        }
-        .dark-mode .text-gray-900 {
-            color: #e2e8f0 !important;
-        }
-        .dark-mode .text-gray-700 {
-            color: #cbd5e0 !important;
-        }
-        .dark-mode .border {
-            border-color: #4a5568 !important;
-        }
-        .dark-mode .shadow-lg {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
-        }
-        .dark-mode .hover\\:bg-blue-700:hover {
-            background-color: #2c5282 !important;
+        /* Keyframes for the border color change animation */
+        @keyframes borderColorChange {
+            0% {
+                border-color: #3490dc; /* Blue */
+            }
+            25% {
+                border-color: #38c172; /* Green */
+            }
+            50% {
+                border-color: #ffed4a; /* Yellow */
+            }
+            75% {
+                border-color: #e3342f; /* Red */
+            }
+            100% {
+                border-color: #3490dc; /* Blue */
+            }
         }
         
-        /* Custom styles specific to this page */
-        .name-link {
-            transition: transform 0.3s ease-in-out;
+        .skill-item:hover {
+            animation: borderColorChange 4s infinite;
         }
-        .name-link:hover {
-            transform: scale(1.05); /* Scale up on hover */
-            color: aqua;
+        
+        /* Circular Progress Bar */
+        .progress-circle {
+            position: relative;
+            width: 100px;
+            height: 100px;
         }
-    
-    </style>
+        
+        .circle {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(#3490dc 0%, #3490dc var(--percentage), #e2e8f0 var(--percentage), #e2e8f0 100%);
+        }
+        
+        .circle .inside-circle {
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            background: white;
+            border-radius: 50%;
+            top: 15%;
+            left: 15%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #3490dc;
+        }
+        
+        /* Adjust rotation for different percentages */
+        [data-percentage="90"] .circle {
+            --percentage: 324deg;
+        }
+        
+        [data-percentage="80"] .circle {
+            --percentage: 288deg;
+        }
+        
+        [data-percentage="70"] .circle {
+            --percentage: 252deg;
+        }
+        @keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+    color: orange; 
+  }
+  40% {
+    transform: translateY(-30px);
+    color: #ff0000; /* Red */
+  }
+  60% {
+    transform: translateY(-15px);
+    color: #00ff00; /* Green */
+  }
+}
+
+.spin-animation {
+  animation: spin 10s linear infinite;
+}
+
+.bounce-animation {
+  animation: bounce 2s infinite;
+}
+        </style>
 </head>
-<body class="bg-gray-50 text-gray-800 transition duration-300">
-    <!-- Task 1: Basic HTML Structure - START -->
+
+<body class="bg-gray-50 text-gray-800">
+    <!-- Basic HTML Structure -->
     <header class="p-6 bg-gray-800 text-white">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="./img/Logo.png" alt="Logo" class="w-8 h-8 mr-3">
-                <h1 class="text-2xl font-bold name-link">Dinesh S.</h1>
-            </div>
-    
-            <nav>
-                <ul class="flex space-x-6">
-                    <li><a href="#home" class="hover:text-gray-300">Home</a></li>
-                    <li><a href="#about" class="hover:text-gray-300">About</a></li>
-                    <li><a href="#skills" class="hover:text-gray-300">Skills</a></li>
-                    <li><a href="#projects" class="hover:text-gray-300">Projects</a></li>
-                    <li><a href="#contact" class="hover:text-gray-300">Contact</a></li>
-                </ul>
-            </nav>
-    
-            <!-- Day/Night Toggle Button -->
-            <div class="toggle-wrapper">
-                <input type="checkbox" id="theme-toggle" class="toggle-checkbox">
-                <label for="theme-toggle" class="toggle-label"></label>
-            </div>
+          <!-- Logo and Name Section -->
+          <div class="flex items-center space-x-3">
+            <img src="./img/Logo.png" alt="Logo" class="w-8 h-8 spin-animation">
+            <h1 class="text-2xl font-bold bounce-animation">Dinesh S.</h1>
+          </div>
+          <!-- Navigation Bar -->
+          <nav>
+            <ul class="flex space-x-6">
+              <li><a href="#home" class="hover:text-gray-300">Home</a></li>
+              <li><a href="#about" class="hover:text-gray-300">About</a></li>
+              <li><a href="#skills" class="hover:text-gray-300">Skills</a></li>
+              <li><a href="#projects" class="hover:text-gray-300">Projects</a></li>
+              <li><a href="#contact" class="hover:text-gray-300">Contact</a></li>
+            </ul>
+          </nav>
         </div>
-    </header>
-    
-    <!-- Task 1: Basic HTML Structure - END -->
+      </header>
+      
 
-    <!-- Task 2: Header - START -->
-    <!-- Header already structured above -->
-    <!-- Task 2: Header - END -->
-
-    <!-- Task 3: Home Section - START -->
+    <!-- Home Section -->
     <section id="home" class="py-20 text-center bg-gradient-to-r from-blue-500 to-teal-500 text-white">
         <div class="container mx-auto">
-            <h2 class="text-5xl font-bold">Welcome to My Portfolio</h2>
-            <p class="mt-4 text-xl">I am a Full Stack Developer. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel eaque illo fuga corrupti explicabo ut rerum consequuntur, accusamus facilis, aperiam unde recusandae! Ut nihil cumque optio architecto corrupti inventore quos consectetur iusto eum? Ipsam quam, dolorem accusantium corrupti neque illum exercitationem sunt pariatur assumenda at vitae harum laudantium dolores debitis.</p>
-            <img src="./img/Dinesh.jpg" alt="Profile" class="w-40 h-40 mx-auto rounded-full mt-6 shadow-lg transition transform hover:scale-105">
+            <h2 class="text-5xl font-bold transition-all duration-500 ease-in-out transform hover:scale-110 hover:text-green-500 hover:opacity-80">
+                Welcome to My Portfolio
+              </h2>
+            <p class="mt-4 text-xl">I am a Full Stack Developer.</p>
+            <img src="./img/Dinesh.jpg" alt="Profile" class="w-40 h-40 mx-auto rounded-full mt-6 shadow-lg">
             <div class="mt-6">
-                <a href="./My Resume.pdf " target="_blank"  class="bg-white text-blue-500 px-6 py-3 rounded-full shadow-lg transition transform hover:bg-blue-500 hover:text-white hover:scale-105">Download Resume</a>
+                <a href="./My Resume.pdf" target="_blank" class="bg-white text-blue-500 px-6 py-3 rounded-full shadow-lg transition transform hover:bg-blue-500 hover:text-white">Download Resume</a>
             </div>
-           <div class="flex justify-center space-x-6 mt-6">
-    <a href="https://www.facebook.com/"><img src="img/Facebook-logo.png" alt="Facebook" class="w-8 h-8 transition transform hover:scale-110"></a>
-    <a href="https://x.com/X"><img src="img/X.png" alt="X" class="w-8 h-8 transition transform hover:scale-110"></a>
-    <a href="https://www.linkedin.com/feed/"><img src="img/logo-Linkedin.png" alt="LinkedIn" class="w-8 h-8 transition transform hover:scale-110"></a>
-    <a href="https://github.com/"><img src="img/GitHub-Symbol.png" alt="GitHub" class="w-8 h-8 transition transform hover:scale-110"></a>
-</div>
-
+            <div class="flex justify-center space-x-6 mt-6">
+                <a href="https://www.facebook.com/"><img src="img/Facebook-logo.png" alt="Facebook" class="w-8 h-8 transition transform hover:scale-110"></a>
+                <a href="https://x.com/X"><img src="img/X.png" alt="X" class="w-8 h-8 transition transform hover:scale-110"></a>
+                <a href="https://www.linkedin.com/feed/"><img src="img/logo-Linkedin.png" alt="LinkedIn" class="w-8 h-8 transition transform hover:scale-110"></a>
+                <a href="https://github.com/"><img src="img/GitHub-Symbol.png" alt="GitHub" class="w-8 h-8 transition transform hover:scale-110"></a>
+            </div>
         </div>
     </section>
-    <!-- Task 3: Home Section - END -->
 
-    <!-- Task 4: About Section - START -->
-    <section id="about" class="py-20 text-center bg-gray-100 dark:bg-gray-800">
+    <!-- About Section -->
+    <section id="about" class="py-20 text-center bg-gray-100 " style="background-image: url('img/About_background.jpg')">
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-gray-900 dark:text-white">About Me</h2>
-            <p class="mt-4 text-lg text-gray-700 dark:text-gray-300">I am passionate about building web applications. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis harum praesentium eum quae quod, magnam a. Modi, sint molestias? Quibusdam corrupti alias, pariatur minus est officia eius neque laudantium nam nobis iure ullam et molestias fugit eligendi inventore incidunt consequatur!</p>
+            <h2 class="text-4xl font-bold text-gray-900">About Me</h2>
+            <p class="mt-4 text-lg text-gray-700">I am passionate about building web applications.</p>
             <img src="img/Dinesh.jpg" alt="Profile" class="w-32 h-32 mx-auto rounded-full mt-6">
             <div class="mt-6">
-                <button class="bg-blue-500 text-white px-6 py-3 rounded-full shadow-lg transition transform hover:bg-blue-700 hover:scale-105">Read More</button>
+                <button class="bg-blue-500 text-white px-6 py-3 rounded-full shadow-lg transition transform hover:bg-blue-700">Read More</button>
             </div>
         </div>
     </section>
-    <!-- Task 4: About Section - END -->
 
-    <!-- Task 5: Skills Section -->
-    <section id="skills" class="py-20 text-center bg-gray-200">
-        <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-gray-900 mb-12">Skills</h2>
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-100 text-center" style="background-image: url('./img/Skills.jpeg');">
+        <div class="container mx-auto ">
+            <!-- Section Title -->
+            <h2 class="text-4xl font-bold text-gray-900 mb-12">My Skills</h2>
+            <!-- Skills List -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Skill 1 -->
-                <div class="p-6 rounded-lg shadow-lg bg-white">
-                    <h3 class="text-2xl font-semibold text-gray-900 ">JAVA</h3>
-                    <!-- Circular Progress Bar -->
-                    <div class="w-24 h-24 relative">
-                        <svg class="absolute" viewBox="0 0 36 36" width="100%" height="100%">
-                            <circle class="stroke-current text-gray-300" cx="18" cy="18" r="15.91549430918954" fill="none" stroke-width="3" />
-                            <circle class="stroke-current text-blue-500" cx="18" cy="18" r="15.91549430918954" fill="none" stroke-width="3" stroke-dasharray="80, 100" stroke-dashoffset="25" transform="rotate(-90 18 18)" />
-                        </svg>
-                        <div class="flex justify-center items-center w-full h-full text-center text-gray-900 font-semibold text-lg">
-                            80%
+                <!-- Skill Item 1 -->
+                <div class="skill-item p-8 rounded-lg shadow-lg bg-white relative border-4 border-transparent transition-all duration-500 hover:border-color-change">
+                    <div class="progress-circle mx-auto mb-4" data-percentage="90">
+                        <div class="circle">
+                            <div class="inside-circle">90%</div>
                         </div>
                     </div>
+                    <h3 class="text-2xl font-semibold mb-4">HTML</h3>
+                    <p class="text-gray-600">Proficient in HTML5, including semantic elements and best practices.</p>
                 </div>
-                <!-- Skill 2 -->
-                <div class="p-6 rounded-lg shadow-lg bg-white">
-                    <h3 class="text-2xl font-semibold text-gray-900">RDBMS</h3>
-                    <!-- Circular Progress Bar -->
-                    <div class="w-24 h-24 relative">
-                        <svg class="absolute" viewBox="0 0 36 36" width="100%" height="100%">
-                            <circle class="stroke-current text-gray-300" cx="18" cy="18" r="15.91549430918954" fill="none" stroke-width="3" />
-                            <circle class="stroke-current text-blue-500" cx="18" cy="18" r="15.91549430918954" fill="none" stroke-width="3" stroke-dasharray="70, 100" stroke-dashoffset="25" transform="rotate(-90 18 18)" />
-                        </svg>
-                        <div class="flex justify-center items-center w-full h-full text-center text-gray-900 font-semibold text-lg">
-                            70%
+                <!-- Skill Item 2 -->
+                <div class="skill-item p-8 rounded-lg shadow-lg bg-white relative border-4 border-transparent transition-all duration-500 hover:border-color-change">
+                    <div class="progress-circle mx-auto mb-4" data-percentage="80">
+                        <div class="circle">
+                            <div class="inside-circle">80%</div>
                         </div>
                     </div>
+                    <h3 class="text-2xl font-semibold mb-4">CSS</h3>
+                    <p class="text-gray-600">Experienced in creating responsive designs and advanced layouts.</p>
                 </div>
-                <!-- Skill 3 -->
-                <div class="p-6 rounded-lg shadow-lg bg-white">
-                    <h3 class="text-2xl font-semibold text-gray-900">MY SQL</h3>
-                    <!-- Circular Progress Bar -->
-                    <div class="w-24 h-24 relative">
-                        <svg class="absolute" viewBox="0 0 36 36" width="100%" height="100%">
-                            <circle class="stroke-current text-gray-300" cx="18" cy="18" r="15.91549430918954" fill="none" stroke-width="3" />
-                            <circle class="stroke-current text-blue-500" cx="18" cy="18" r="15.91549430918954" fill="none" stroke-width="3" stroke-dasharray="60, 100" stroke-dashoffset="25" transform="rotate(-90 18 18)" />
-                        </svg>
-                        <div class="flex justify-center items-center w-full h-full text-center text-gray-900 font-semibold text-lg">
-                            60%
+                <!-- Skill Item 3 -->
+                <div class="skill-item p-8 rounded-lg shadow-lg bg-white relative border-4 border-transparent transition-all duration-500 hover:border-color-change">
+                    <div class="progress-circle mx-auto mb-4" data-percentage="70">
+                        <div class="circle">
+                            <div class="inside-circle">70%</div>
                         </div>
                     </div>
+                    <h3 class="text-2xl font-semibold mb-4">JavaScript</h3>
+                    <p class="text-gray-600">Skilled in modern JavaScript frameworks and libraries.</p>
                 </div>
             </div>
         </div>
     </section>
     
-<!-- TASK 5 Skills Section END  -->
-
-    <!-- Task 6: Certifications Section - START -->
-    <section id="certifications" class="py-20 text-center bg-gray-100 dark:bg-gray-800">
+    
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-100">
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-gray-900 dark:text-white">Certifications</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                <div class="border p-6 rounded-lg shadow-lg bg-white dark:bg-gray-700">
-                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Let's Begin Training</h3>
-                    <p class="mt-4 text-gray-700 dark:text-gray-300">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi, est? Exercitationem, quo minima! Ipsam similique quod sed facilis rem quasi corrupti ut, quae molestias dolorum reprehenderit sit quia distinctio voluptatem praesentium alias sunt nobis unde? Atque debitis tenetur eveniet quia Lorem, ipsum.</p>
-                    <a href="../Certificates/Internshala/Full Stack Development_ Let's begin Training - Certificate of Completion.pdf" class="block text-blue-500 mt-4 transition transform hover:scale-105">View Certificate</a>
-                </div>
-                <div class="border p-6 rounded-lg shadow-lg bg-white dark:bg-gray-700">
-                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Front End Developement</h3>
-                    <p class="mt-4 text-gray-700 dark:text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sunt odit dolores expedita eligendi magni laborum accusamus officia similique? Consequatur corrupti nesciunt aperiam vero aliquid iste ipsam. Ab facilis alias rerum possimus expedita minima hic. Tempore eligendi porro rerum qui?</p>
-                    <a href="../Certificates/Coursera - Front end developement.pdf" class="block text-blue-500 mt-4 transition transform hover:scale-105">View Certificate</a>
-                </div>
-                <div class="border p-6 rounded-lg shadow-lg bg-white dark:bg-gray-700">
-                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Java Certificate </h3>
-                    <p class="mt-4 text-gray-700 dark:text-gray-300">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur eaque numquam, temporibus debitis explicabo odio, architecto laborum reprehenderit, fuga omnis sed asperiores. Laudantium doloribus iste saepe? Quis quasi asperiores aut? Cum modi expedita iure officia at error eaque qui laboriosam.</p>
-                    <a href="../Certificates/Dinesh (Infosys Springboard Certificate).pdf" class="block text-blue-500 mt-4 transition transform hover:scale-105">View Certificate</a>
-                </div>
+            <h2 class="text-4xl font-bold text-gray-900 text-center mb-12">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <article class="p-6 rounded-lg shadow-lg bg-white border border-transparent transition-transform transform-gpu hover:-translate-y-1 hover:scale-110 hover:border-red-500">
+                    <img src="img/P1.jpg" alt="Project 1" class="rounded-t-lg">
+                    <h3 class="text-2xl font-semibold text-gray-900 mt-4">Project Title 1</h3>
+                    <p class="text-gray-700 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id quam et libero vehicula ultrices.</p>
+                    <a href="https://github.com/project1" class="text-blue-500 mt-4 inline-block">View on GitHub</a>
+                </article>
+                <!-- Project 2 -->
+                <article class="p-6 rounded-lg shadow-lg bg-white border border-transparent transition-transform transform-gpu hover:-translate-y-1 hover:scale-110 hover:border-green-500">
+                    <img src="img/P2.jpg" alt="Project 2" class="rounded-t-lg">
+                    <h3 class="text-2xl font-semibold text-gray-900 mt-4">Project Title 2</h3>
+                    <p class="text-gray-700 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id quam et libero vehicula ultrices.</p>
+                    <a href="https://github.com/project2" class="text-blue-500 mt-4 inline-block">View on GitHub</a>
+                </article>
+                <!-- Project 3 -->
+                <article class="p-6 rounded-lg shadow-lg bg-white border border-transparent transition-transform transform-gpu hover:-translate-y-1 hover:scale-110 hover:border-blue-500">
+                    <img src="img/P3.jpg" alt="Project 3" class="rounded-t-lg">
+                    <h3 class="text-2xl font-semibold text-gray-900 mt-4">Project Title 3</h3>
+                    <p class="text-gray-700 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id quam et libero vehicula ultrices.</p>
+                    <a href="https://github.com/project3" class="text-blue-500 mt-4 inline-block">View on GitHub</a>
+                </article>
+                <!-- Project 4 -->
+                <article class="p-6 rounded-lg shadow-lg bg-white border border-transparent transition-transform transform-gpu hover:-translate-y-1 hover:scale-110 hover:border-yellow-500">
+                    <img src="img/p4.jpg" alt="Project 4" class="rounded-t-lg">
+                    <h3 class="text-2xl font-semibold text-gray-900 mt-4">Project Title 4</h3>
+                    <p class="text-gray-700 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id quam et libero vehicula ultrices.</p>
+                    <a href="https://github.com/project4" class="text-blue-500 mt-4 inline-block">View on GitHub</a>
+                </article>
+                <!-- Project 5 -->
+                <article class="p-6 rounded-lg shadow-lg bg-white border border-transparent transition-transform transform-gpu hover:-translate-y-1 hover:scale-110 hover:border-purple-500">
+                    <img src="img/p5.jpg" alt="Project 5" class="rounded-t-lg">
+                    <h3 class="text-2xl font-semibold text-gray-900 mt-4">Project Title 5</h3>
+                    <p class="text-gray-700 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id quam et libero vehicula ultrices.</p>
+                    <a href="https://github.com/project5" class="text-blue-500 mt-4 inline-block">View on GitHub</a>
+                </article>
+                <!-- Project 6 -->
+                <article class="p-6 rounded-lg shadow-lg bg-white border border-transparent transition-transform transform-gpu hover:-translate-y-1 hover:scale-110 hover:border-pink-500">
+                    <img src="img/p6.jpg" alt="Project 6" class="rounded-t-lg w-full">
+                    <h3 class="text-2xl font-semibold text-gray-900 mt-4">Project Title 6</h3>
+                    <p class="text-gray-700 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id quam et libero vehicula ultrices.</p>
+                    <a href="https://github.com/project6" class="text-blue-500 mt-4 inline-block">View on GitHub</a>
+                </article>
             </div>
         </div>
     </section>
-    <!-- Task 6: Certifications Section - END -->
+    
 
-    <!-- Task 7: Project Section - START -->
-    <section id="projects" class="py-20 text-center">
-        <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-red-400 dark:text-black">My Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-                <div class="border p-6 rounded-lg shadow-lg bg-white dark:bg-gray-700 transition transform hover:scale-105">
-                    <a href="https://github.com/Master-dinesh" target="_blank" rel="noopener noreferrer"><h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Project 1</h3></a>
-                    <p class="mt-4 text-gray-700 dark:text-gray-300">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis et explicabo vero aperiam odit, eaque pariatur numquam soluta veniam, beatae quasi provident, minus repellendus quidem esse maxime! Odio veritatis quidem, ut maxime obcaecati possimus fuga placeat, quibusdam velit, culpa dolorum.</p>
-                </div>
-                <div class="border p-6 rounded-lg shadow-lg bg-white dark:bg-gray-700 transition transform hover:scale-105">
-                    <a href="https://github.com/Master-dinesh" target="_blank" rel="noopener noreferrer"><h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Project 2</h3></a>
-                    <p class="mt-4 text-gray-700 dark:text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt atque, consequatur consequuntur, deserunt doloribus expedita rerum blanditiis adipisci tempore illo nihil corrupti dolorum nobis eum ad quas? Tempore dolores facilis, excepturi nulla porro saepe, obcaecati, repellat ab sunt tenetur ratione.</p>
-                </div>
-                <div class="border p-6 rounded-lg shadow-lg bg-white dark:bg-gray-700 transition transform hover:scale-105">
-                    <a href="https://github.com/Master-dinesh" target="_blank" rel="noopener noreferrer"><h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Project 3</h3></a>
-                    <p class="mt-4 text-gray-700 dark:text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, esse modi at neque veniam non dolores deleniti nemo, magnam aliquid fuga ipsum. Nostrum maiores quia atque accusantium harum, quae sequi itaque illum magni illo incidunt saepe! Vel corporis beatae sequi, sed delectus praesentium consequuntur suscipit tempore perferendis. Deserunt maiores, omnis nulla illum, sapiente sunt quos iusto, quod praesentium veniam doloribus.</p>
-                </div>
-                <div class="border p-6 rounded-lg shadow-lg bg-white dark:bg-gray-700 transition transform hover:scale-105">
-                    <a href="https://github.com/Master-dinesh" target="_blank" rel="noopener noreferrer"><h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Project 4</h3></a>
-                    <p class="mt-4 text-gray-700 dark:text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi ipsum ad nisi soluta obcaecati provident exercitationem, reiciendis non ut accusamus. Fugit, architecto velit cupiditate ratione adipisci labore deleniti cum praesentium beatae voluptates porro. Eum culpa ullam dicta atque eligendi blanditiis beatae minima eos vel. Veritatis illum sit unde dicta aut, error doloribus exercitationem saepe veniam impedit soluta a ducimus eveniet eum excepturi nihil ab velit quidem corporis at fugit nostrum?</p>
-                </div>
-                <div class="border p-6 rounded-lg shadow-lg bg-white dark:bg-gray-700 transition transform hover:scale-105">
-                    <a href="https://github.com/Master-dinesh" target="_blank" rel="noopener noreferrer"><h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Project 5</h3></a>
-                    <p class="mt-4 text-gray-700 dark:text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio dignissimos inventore voluptates sequi, veritatis, odit voluptate obcaecati tenetur nesciunt nihil temporibus! Inventore consequatur itaque dicta aliquam tempora quam nisi voluptate sunt reiciendis debitis eligendi expedita, quas ex, ad vitae aut nihil, animi laudantium possimus voluptatibus ipsum molestias tempore! Tenetur iusto beatae natus? Reprehenderit nihil doloribus ullam facilis necessitatibus nam rem asperiores sequi quibusdam itaque eveniet delectus est impedit cum, amet eos recusandae quisquam quasi? Nemo perspiciatis facilis libero numquam quia?</p>
-                </div>
-                <div class="border p-6 rounded-lg shadow-lg bg-white dark:bg-gray-700 transition transform hover:scale-105">
-                    <a href="https://github.com/Master-dinesh" target="_blank" rel="noopener noreferrer"><h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Project 6</h3></a>
-                    <p class="mt-4 text-gray-700 dark:text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore eius porro ratione facere voluptatem, harum tempore provident incidunt aspernatur ducimus explicabo sed vero veritatis eveniet animi, alias nesciunt officia accusamus maiores repellendus architecto! Illum magni mollitia, perspiciatis necessitatibus voluptatum aliquid aut fugit vel assumenda, nam doloribus porro officiis. Tempora voluptatibus excepturi atque quam accusamus esse ut nesciunt voluptatem neque optio, debitis, quisquam adipisci qui corrupti. Velit cupiditate necessitatibus ducimus adipisci?</p>
-                </div>
+    <!-- Contact Section -->
+<section id="contact" class="relative py-20 bg-gray-200 text-center">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('./img/Contact-form-background.jpg');">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+    </div>
+    <div class="relative container mx-auto">
+        <!-- Section Title -->
+        <h2 class="text-4xl font-bold text-white mb-12">Contact Me</h2>
+        <!-- Contact Form -->
+        <form class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg relative z-10">
+            <!-- Name Field -->
+            <div class="mb-6">
+                <label for="name" class="block text-gray-700 text-sm font-semibold mb-2">Name</label>
+                <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
-        </div>
-    </section>
-    <!-- Task 7: Project Section - END -->
-
-    <!-- Task 8: Contact Section - START -->
-    <section id="contact" class="py-20 text-center bg-gray-100 dark:bg-gray-800">
-        <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-gray-900 dark:text-white">Contact Me</h2>
-            <form class="mt-8">
-                <div class="mb-4">
-                    <input type="text" placeholder="Name" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div class="mb-4">
-                    <input type="email" placeholder="Email" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div class="mb-4">
-                    <textarea placeholder="Message" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                </div>
-                <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-full shadow-lg transition transform hover:bg-blue-700 hover:scale-105">Submit</button>
-            </form>
-        </div>
-    </section>
-    <!-- Task 8: Contact Section - END -->
-
-    <!-- Task 9: Footer - START -->
-    <footer class="py-6 bg-gray-800 text-white text-center">
-        <div class="container mx-auto">
-            <p>&copy; 2024 Dinesh S.</p>
-            <div class="flex justify-center space-x-6 mt-4">
-                <a href="tel:+91 9445835532" class="bg-blue-500 text-white px-6 py-3 rounded-full shadow-lg transition transform hover:bg-blue-700 hover:scale-105">Call</a>
-                <a href="mailto:dinesh.suresh2001@gmail.com" class="bg-blue-500 text-white px-6 py-3 rounded-full shadow-lg transition transform hover:bg-blue-700 hover:scale-105">Email</a>
+            <!-- Email Field -->
+            <div class="mb-6">
+                <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Email</label>
+                <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
-        </div>
+            <!-- Message Field -->
+            <div class="mb-6">
+                <label for="message" class="block text-gray-700 text-sm font-semibold mb-2">Message</label>
+                <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+            </div>
+            <!-- Submit Button -->
+            <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-full shadow-lg transition transform hover:bg-blue-700 hover:scale-105">Send Message</button>
+        </form>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="py-6 bg-gray-800 text-center text-white">
+        <p>&copy; 2024 Dinesh S. All Rights Reserved.</p>
     </footer>
-    <!-- Task 9: Footer - END -->
-
-    <!-- Task 10: CSS Styling -->
-    <!-- Styling already included above -->
 </body>
+
 </html>
